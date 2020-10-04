@@ -1,21 +1,19 @@
 CC  := gcc
-CFLAGS  := -w -std=gnu99 -ggdb -ffunction-sections 
-LFLAGS  := -lpthread
+#CFLAGS  := -w -std=gnu99 -ggdb -ffunction-sections # -w:关闭所有告警
+CFLAGS = -g -I. $(CCFLAGS)
 SRCS    := $(wildcard *.c) # 当前目录下的所有的.c文件 
 OBJS    := $(SRCS:.c=.o) # 将所有的.c文件名替换为.o
-REDISLIB    := libredis.a
+REDISLIB	:= libredis.a
 
 all:$(REDISLIB) gccr
 
-
 # ***************************************************************
 # C compilations
-
-sds.o: sds.c sds.h makefile
-	$(CC) $(CFLAGS) -c sds.c
-
-zmalloc.o: zmalloc.c zmalloc.h makefile
+zmalloc.o: zmalloc.c zmalloc.h
 	$(CC) $(CFLAGS) -c zmalloc.c
+
+sds.o: sds.c sds.h
+	$(CC) $(CFLAGS) -c sds.c
 
 $(REDISLIB):$(OBJS)
 	-rm -f $(REDISLIB)
