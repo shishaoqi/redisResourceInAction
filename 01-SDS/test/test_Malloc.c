@@ -1,0 +1,1 @@
+#include <stdio.h>#include "zmalloc.h"// 查询当前使用的是哪个内存分配器int main() {    printf("malloc: %s\n", ZMALLOC_LIB);    return 0;}
