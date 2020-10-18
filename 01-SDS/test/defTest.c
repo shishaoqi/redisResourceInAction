@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <jemalloc/jemalloc.h>
 
 int main() {
     #if defined(USE_TCMALLOC)
@@ -16,12 +17,11 @@ int main() {
     #elif defined(USE_JEMALLOC)
     printf("defined(USE_JEMALLOC)\n");
     #define ZMALLOC_LIB ("jemalloc-" __xstr(JEMALLOC_VERSION_MAJOR) "." __xstr(JEMALLOC_VERSION_MINOR) "." __xstr(JEMALLOC_VERSION_BUGFIX))
-    #include <jemalloc/jemalloc.h>
     #if (JEMALLOC_VERSION_MAJOR == 2 && JEMALLOC_VERSION_MINOR >= 1) || (JEMALLOC_VERSION_MAJOR > 2)
     #define HAVE_MALLOC_SIZE 1
     #define zmalloc_size(p) je_malloc_usable_size(p)
     #else
-    #error "Newer version of jemalloc required"
+    printf("Newer version of jemalloc required");
     #endif
 
     #elif defined(__APPLE__)
