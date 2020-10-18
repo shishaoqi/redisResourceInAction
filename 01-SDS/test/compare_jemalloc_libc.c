@@ -3,10 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-//#include "zmalloc.h"
-
-//要使用 jemalloc 一定要有这个
-#include <jemalloc/jemalloc.h>
+// #include "zmalloc.h" 当开启这个时，请把替换如下的 malloc --> zmalloc  free --> zfree
 
 #define MSECOND 1000000
 
@@ -25,11 +22,11 @@ int main(void)
 
     gettimeofday(&tpstart, NULL);
     for (i = 0; i < loops; i++) {
-        //size = rand() & 0x0000000000000fff;
-        ptr = malloc(size);
+        size = rand() & 0x0000000000000fff;
+        ptr = malloc(size);// zmalloc
         pad = rand() & 0xff;
         memset(ptr, pad, size);
-        free(ptr);
+        free(ptr); // zfree
     }
 
     gettimeofday(&tpend, NULL);
