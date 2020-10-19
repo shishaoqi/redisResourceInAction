@@ -1,0 +1,11 @@
+#! /bin/csh -f
+set INCLUDE = /www/redisResourceInAction/01-SDS
+set REDISLIB = $INCLUDE/libredis.a
+set LIBRARIES = ($REDISLIB $INCLUDE/deps/jemalloc/lib/libjemalloc.a -lX11 -lm -ldl -lpthread)
+foreach x ($*)
+  if ("x$x" == "x-c") then
+    set LIBRARIES = ""
+    break
+  endif
+end
+gcc -g -DUSE_JEMALLOC -I$INCLUDE -I$INCLUDE/deps/jemalloc/include $* $LIBRARIES
