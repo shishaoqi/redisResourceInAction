@@ -1,6 +1,6 @@
 CC  := gcc
 #CFLAGS  := -w -std=gnu99 -ggdb -ffunction-sections # -w:关闭所有告警
-CFLAGS = -g -I. $(CCFLAGS)
+CFLAGS  := -g -I. $(CCFLAGS)
 SRCS    := $(wildcard *.c) # 当前目录下的所有的.c文件 
 OBJS    := $(SRCS:.c=.o) # 将所有的.c文件名替换为.o
 REDISLIB	:= libredis.a
