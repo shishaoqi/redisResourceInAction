@@ -8,4 +8,4 @@ foreach x ($*)
     break
   endif
 end
-gcc -g -DUSE_JEMALLOC -I$INCLUDE -I$INCLUDE/deps/jemalloc/include $* $LIBRARIES
+gcc -g -I$INCLUDE -I$INCLUDE/deps/jemalloc/include $* $LIBRARIES
