@@ -43,7 +43,7 @@ gccr: makefile
 	@echo '    break' >> gccr
 	@echo '  endif' >> gccr
 	@echo 'end' >> gccr
-	@echo 'gcc -g -I$$INCLUDE -I$$INCLUDE/deps/jemalloc/include $$* $$LIBRARIES' >> gccr
+	@echo 'gcc -g -DUSE_JEMALLOC -I$$INCLUDE -I$$INCLUDE/deps/jemalloc/include $$* $$LIBRARIES' >> gccr
 	@chmod a+x gccr
 	@echo '[gccr script created]'
 	-(cd ./deps && $(MAKE) $(DEPENDENCY_TARGETS))
