@@ -1,5 +1,5 @@
 .idea/
 */redis
 */*.[ado]
-*/*/.[ado]
+*/*/*.[ado]
 data_structure/*/*.[ado]

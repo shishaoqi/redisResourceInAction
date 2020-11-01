@@ -11,7 +11,7 @@
 #include "sds.h"
 
 int main() {
-    char *str = "hello";
+    char *str = "hello-hello-hello-hello-hello-hello-hello";
     sds sdsStr;
 
     // 创建一个包含给定C字符串的SDS
