@@ -18,11 +18,11 @@ int main() {
     printf("%s\n", moreMemry);
 
     size_t length = sdslen(moreMemry);
-    printf("String length is %d\n", length);
+    printf("String length is %lu\n", length);
 
     //sdsavail
     length = sdsavail(moreMemry);
-    printf("String avail length is %d\n", length);
+    printf("String avail length is %lu\n", length);
 
     char *addStr = "abcedf";
     moreMemry = sdscat(moreMemry, addStr);
@@ -43,7 +43,7 @@ int main() {
     
     //sdsavail
     length = sdsavail(newMoreMemry);
-    printf("New string avail length is %d\n", length);
+    printf("New string avail length is %lu\n", length);
 
     //sdscat
     sds moreMemry_sec = sdsnewlen(strp, strlen(strp));

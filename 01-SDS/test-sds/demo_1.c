@@ -20,7 +20,7 @@ int main() {
 
     // 返回SDS的已使用空间字节数
     size_t length = sdslen(sdsStr);
-    printf("sdsStr length: %d\n", length);
+    printf("sdsStr length: %lu\n", length);
 
     sds secondStr = "keep doing";
     // 根据给定的初始化字符串 init 和字符串长度 initlen，创建一个新的 sds
@@ -28,7 +28,7 @@ int main() {
     printf("new sdsStr content: %s\n", sdsStr);
 
     length = sdslen(sdsStr);
-    printf("new sdsStr length: %d\n", length);
+    printf("new sdsStr length: %lu\n", length);
 
     //create empty string
     sds emptyStr = sdsempty();

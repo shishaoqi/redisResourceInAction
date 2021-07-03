@@ -27,7 +27,7 @@ gccr: makefile
 	@echo '#! /bin/csh -f' > gccr
 	@echo 'set INCLUDE =' `pwd` >> gccr
 	@echo 'set REDISLIB = $$INCLUDE/libredis.a' >> gccr
-	@echo 'set LIBRARIES = ($$REDISLIB -lX11 -lm)' >> gccr
+	@echo 'set LIBRARIES = ($$REDISLIB)' >> gccr
 	@echo 'foreach x ($$*)' >> gccr
 	@echo '  if ("x$$x" == "x-c") then' >> gccr
 	@echo '    set LIBRARIES = ""' >> gccr
