@@ -1,5 +1,6 @@
 .idea/
 */redis
+*/gccr
 */*.[ado]
 */*/*.[ado]
 data_structure/*/*.[ado]
