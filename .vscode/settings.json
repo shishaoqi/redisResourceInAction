@@ -4,6 +4,8 @@
         "cassert": "c",
         "memory": "c",
         "optional": "c",
-        "iterator": "c"
+        "iterator": "c",
+        "__string": "c",
+        "cstring": "c"
     }
 }
