@@ -14,6 +14,9 @@ mt19937.o: mt19937.c mt19937.h
 redisassert.o: redisassert.c redisassert.h
 	$(CC) $(CFLAGS) -c redisassert.c
 
+sds.o: sds.c sds.h
+	$(CC) $(CFLAGS) -c sds.c
+
 zmalloc.o: zmalloc.c zmalloc.h
 	$(CC) $(CFLAGS) -c zmalloc.c
 

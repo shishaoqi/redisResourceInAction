@@ -1,16 +1,7 @@
 #include <stdio.h>
+#include <string.h>
+#include "sds.h"
 #include "dict.h"
-
-/* Hash type hash table (note that small hashes are represented with ziplists) */
-dictType hashDictType = {
-    dictSdsHash,                /* hash function */
-    NULL,                       /* key dup */
-    NULL,                       /* val dup */
-    dictSdsKeyCompare,          /* key compare */
-    dictSdsDestructor,          /* key destructor */
-    dictSdsDestructor,          /* val destructor */
-    NULL                        /* allow to expand */
-};
 
 uint64_t dictSdsHash(const void *key) {
     return dictGenHashFunction((unsigned char*)key, sdslen((char*)key));
@@ -35,9 +26,20 @@ void dictSdsDestructor(void *privdata, void *val)
     sdsfree(val);
 }
 
+/* Hash type hash table (note that small hashes are represented with ziplists) */
+dictType hashDictType = {
+    dictSdsHash,                /* hash function */
+    NULL,                       /* key dup */
+    NULL,                       /* val dup */
+    dictSdsKeyCompare,          /* key compare */
+    dictSdsDestructor,          /* key destructor */
+    dictSdsDestructor,          /* val destructor */
+    NULL                        /* allow to expand */
+};
+
 int main() {
     dict *d;
-    d = dictCreate(hashDictType, NULL);
+    d = dictCreate(&hashDictType, NULL);
 
     char *str1 = "key1";
     int val1 = 1;
@@ -48,7 +50,7 @@ int main() {
     dictAdd(d, str2, &val2);
 
     dictIterator *iter;
-    dictEntry *entry
+    dictEntry *entry;
     iter = dictGetIterator(d);
     while((entry = dictNext(iter)) != NULL) {
         printf("integer value = %d \n", *(int*)dictGetVal(entry));
