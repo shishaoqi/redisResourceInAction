@@ -20,7 +20,7 @@ sds.o: sds.c sds.h
 zmalloc.o: zmalloc.c zmalloc.h
 	$(CC) $(CFLAGS) -c zmalloc.c
 
-dict.o: dict.c dict.h
+dict.o: dict.c dict.h siphash.c
 	$(CC) $(CFLAGS) -c dict.c
 
 $(REDISLIB):$(OBJS)

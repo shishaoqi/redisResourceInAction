@@ -6,6 +6,7 @@
         "optional": "c",
         "iterator": "c",
         "__string": "c",
-        "cstring": "c"
+        "cstring": "c",
+        "cstdarg": "c"
     }
 }
