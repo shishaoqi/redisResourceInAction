@@ -33,7 +33,7 @@ dictType hashDictType = {
     NULL,                       /* val dup */
     dictSdsKeyCompare,          /* key compare */
     dictSdsDestructor,          /* key destructor */
-    dictSdsDestructor,          /* val destructor */
+    NULL,          /* val destructor */
     NULL                        /* allow to expand */
 };
 
@@ -41,13 +41,31 @@ int main() {
     dict *d;
     d = dictCreate(&hashDictType, NULL);
 
+    sds sdsStr;
+    sds newfield, newvalue;
     char *str1 = "key1";
+    sdsStr = sdsnew(str1);
+    newfield = sdsdup(sdsStr);
     int val1 = 1;
-    dictAdd(d, str1, &val1);
+    dictAdd(d, newfield, &val1);
+
+    // field = hashTypeCurrentFromHashTable(hi, OBJ_HASH_KEY);
+    // value = hashTypeCurrentFromHashTable(hi, OBJ_HASH_VALUE);
+    // newfield = sdsdup(field);
+    // newvalue = sdsdup(value);
 
     char *str2 = "key2";
+    // 创建一个包含给定C字符串的SDS
+    sdsStr = sdsnew(str2);
+    newfield = sdsdup(sdsStr);
     int val2 = 2;
-    dictAdd(d, str2, &val2);
+    dictAdd(d, newfield, &val2);
+
+    char *str3 = "key3_aaa";
+    sdsStr = sdsnew(str3);
+    newfield = sdsdup(sdsStr);
+    int val3 = 3;
+    dictAdd(d, newfield, &val3);
 
     dictIterator *iter;
     dictEntry *entry;
@@ -55,6 +73,8 @@ int main() {
     while((entry = dictNext(iter)) != NULL) {
         printf("integer value = %d \n", *(int*)dictGetVal(entry));
     }
+
+    dictReleaseIterator(iter);
 
     dictRelease(d);
 }

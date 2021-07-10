@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include "dict.h"
 
 /* _serverAssert is needed by dict */
@@ -15,7 +16,7 @@ void _serverPanic(const char *file, int line, const char *msg, ...) {
     vsnprintf(fmtmsg,sizeof(fmtmsg),msg,ap);
     va_end(ap);
 
-    bugReportStart();
+    //bugReportStart();
     //serverLog(LL_WARNING,"------------------------------------------------");
     //serverLog(LL_WARNING,"!!! Software Failure. Press left mouse button to continue");
     //serverLog(LL_WARNING,"Guru Meditation: %s #%s:%d",fmtmsg,file,line);
@@ -24,10 +25,10 @@ void _serverPanic(const char *file, int line, const char *msg, ...) {
 #ifdef HAVE_BACKTRACE
         logStackTrace(NULL, 1);
 #endif
-        printCrashReport();
+        //printCrashReport();
     //}
 
     // remove the signal handler so on abort() we will output the crash report.
-    removeSignalHandlers();
-    bugReportEnd(0, 0);
+    //removeSignalHandlers();
+    //bugReportEnd(0, 0);
 }
