@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include "dict.h"
 
 /* _serverAssert is needed by dict */
 void _serverAssert(const char *estr, const char *file, int line) {
