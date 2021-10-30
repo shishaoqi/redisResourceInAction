@@ -32,16 +32,17 @@ $(REDISLIB):$(OBJS)
 # Entry to reconstruct the gccr script
 
 gccr: makefile
-	@echo '#! /bin/csh -f' > gccr
-	@echo 'set INCLUDE =' `pwd` >> gccr
-	@echo 'set REDISLIB = $$INCLUDE/libredis.a' >> gccr
-	@echo 'set LIBRARIES = $$REDISLIB' >> gccr
-	@echo 'foreach x ($$*)' >> gccr
-	@echo '  if ("x$$x" == "x-c") then' >> gccr
-	@echo '    set LIBRARIES = ""' >> gccr
+	@echo '#!/bin/bash' > gccr
+	@echo 'INCLUDE='\"`pwd`\" >> gccr
+	@echo 'REDISLIB="$$INCLUDE/libredis.a"' >> gccr
+	@echo 'LIBRARIES="$$REDISLIB"' >> gccr
+	@echo 'for x in $$*' >> gccr
+	@echo 'do' >> gccr
+	@echo '  if [ "x$$x" == "x-c" ];then' >> gccr
+	@echo '    LIBRARIES=""' >> gccr
 	@echo '    break' >> gccr
-	@echo '  endif' >> gccr
-	@echo 'end' >> gccr
+	@echo '  fi' >> gccr
+	@echo 'done' >> gccr
 	@echo 'gcc -g -I$$INCLUDE $$* $$LIBRARIES' >> gccr
 	@chmod a+x gccr
 	@echo '[gccr script created]'
