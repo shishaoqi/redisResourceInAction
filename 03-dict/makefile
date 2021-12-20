@@ -36,13 +36,6 @@ gccr: makefile
 	@echo 'INCLUDE='\"`pwd`\" >> gccr
 	@echo 'REDISLIB="$$INCLUDE/libredis.a"' >> gccr
 	@echo 'LIBRARIES="$$REDISLIB"' >> gccr
-	@echo 'for x in $$*' >> gccr
-	@echo 'do' >> gccr
-	@echo '  if [ "x$$x" == "x-c" ];then' >> gccr
-	@echo '    LIBRARIES=""' >> gccr
-	@echo '    break' >> gccr
-	@echo '  fi' >> gccr
-	@echo 'done' >> gccr
 	@echo 'gcc -g -I$$INCLUDE $$* $$LIBRARIES' >> gccr
 	@chmod a+x gccr
 	@echo '[gccr script created]'
