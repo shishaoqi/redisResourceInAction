@@ -1,5 +1,5 @@
 CC  := gcc
-CFLAGS  := -g -I. $(CCFLAGS) -std=c99 # intset.c:323:5: 错误：只允许在 C99 模式下使用‘for’循环初始化声明
+CFLAGS  := -g -O0 -I. $(CCFLAGS) -std=c99 # intset.c:323:5: 错误：只允许在 C99 模式下使用‘for’循环初始化声明
 SRCS    := $(wildcard *.c) # 当前目录下的所有的.c文件 
 OBJS    := $(SRCS:.c=.o) # 将所有的.c文件名替换为.o
 REDISLIB 	:= libredis.a

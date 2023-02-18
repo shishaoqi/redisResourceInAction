@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "adlist.h"
+#include "zmalloc.h"
 
 typedef int intT;
 

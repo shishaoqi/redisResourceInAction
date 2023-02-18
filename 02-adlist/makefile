@@ -1,5 +1,5 @@
 CC  := gcc
-CFLAGS  := -g -I. $(CCFLAGS)
+CFLAGS  := -g -O0 -I. $(CCFLAGS) -O0 -std=c89
 SRCS    := $(wildcard *.c) # 当前目录下的所有的.c文件 
 OBJS    := $(SRCS:.c=.o) # 将所有的.c文件名替换为.o
 REDISLIB 	:= libredis.a
