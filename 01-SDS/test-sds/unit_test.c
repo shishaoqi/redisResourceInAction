@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 #include "testhelp.h"
 #include "limits.h"
 #include "sds.h"
+#include "zmalloc.h"
 
 #define UNUSED(x) ((void)(x))
 int zmalloc_test(int argc, char **argv) {

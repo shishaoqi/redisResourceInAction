@@ -11,6 +11,8 @@
 int main() {
     zskiplist* sl;
     char characters[] = "abcdefghijklmgopqrstuvwxyz";
+    zskiplistNode* node;
+
     srand((int)time(NULL));
     sl = zslCreate();
 
@@ -34,24 +36,24 @@ int main() {
         zslInsert(sl, sum, newStr);
     }
 
+    sds s = sdsnew("aaaaa");
+    sds e = sdsnew("zzzzz");
+    zlexrangespec firstRange = { .min = s, .max = e, .minex = 0, .maxex = 1000 };
+    zlexrangespec lastRange = { .min = s, .max = e, .minex = 0, .maxex = 1000 };
+    node = zslFirstInLexRange(sl, &firstRange);
+    printf("first element: %s, score: %f\n", node->ele, node->score);
+    node = zslLastInLexRange(sl, &lastRange);
+    printf("last node -- element: %s, score: %.2f\n", node->ele, node->score);
 
-    zrangespec* firstRange;
-    zrangespec* lastRange;
-    //firstRange = zmalloc(sizeof(*zlexrangespec));
-    zslFirstInRange(sl, firstRange);
-    zslLastInRange(sl, lastRange);
+    zlexrangespec range  = { .min = s, .max = e, .minex = 0, .maxex = 1000 };
+    while(node != NULL) {
+        printf("element: %s, score: %f\n", node->ele, node->score);
 
-    //range = 
-    // range->min = sdsNew("aaaaa");
-    // range->max = sdsNew("zzzzz");
-    // range->minex = -1;
-    // range->maxex = 999;
-    // zskiplistNode* node = zslFirstInLexRange(sl, &range);
+        zslDelete(sl, node->score, node->ele, NULL);
+        node = zslFirstInLexRange(sl, &range);
+    }
 
-    // while(node != NULL) {
-    //     zslDelete(sl, node->score, node->ele, NULL);
-    //     node = zslFirstInLexRange(sl, range);
-    // }
+    return 0;
 }
 
 int RandomInteger(int low, int high)

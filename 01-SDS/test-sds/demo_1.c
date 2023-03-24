@@ -27,6 +27,12 @@ int main() {
     sdsStr = sdsnewlen(secondStr, strlen(secondStr));
     printf("new sdsStr content: %s\n", sdsStr);
 
+    //* If NULL is used for 'init' the string is initialized with zero bytes. --  Empty strings are usually created in order to append. （默认） Use type 8
+    //* If SDS_NOINIT is used, the buffer is left uninitialized;
+    // SDS_NOINIT
+    sdsStr = sdsnewlen(SDS_NOINIT, 0);
+    printf("SDS_NOINIT: %s\n", sdsStr);
+
     length = sdslen(sdsStr);
     printf("new sdsStr length: %lu\n", length);
 

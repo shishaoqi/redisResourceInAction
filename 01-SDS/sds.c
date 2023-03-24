@@ -57,6 +57,7 @@ static inline int sdsHdrSize(char type) {
     return 0;
 }
 
+// Req 应是 Require 缩写
 static inline char sdsReqType(size_t string_size) {
     if (string_size < 1<<5)
         return SDS_TYPE_5;
@@ -111,11 +112,11 @@ sds sdsnewlen(const void *init, size_t initlen) {
     unsigned char *fp; /* flags pointer. */
     size_t usable;
 
-    sh = s_malloc_usable(hdrlen+initlen+1, &usable);
+    sh = s_malloc_usable(hdrlen+initlen+1, &usable); // +1 表示加上 null terminator（\0）
     if (sh == NULL) return NULL;
-    if (init==SDS_NOINIT)
+    if (init==SDS_NOINIT) //sdsnew(NULL)不成立  sdsnew(SDS_NOINIT) 成立     //sdsempty() 不成立（跳过）
         init = NULL;
-    else if (!init)
+    else if (!init)       //sdsnew(NULL) 成立   sdsnew(SDS_NOINIT) 不成立   //sdsempty() 不成立（跳过） 
         memset(sh, 0, hdrlen+initlen+1);
     s = (char*)sh+hdrlen;
     fp = ((unsigned char*)s)-1;
@@ -124,11 +125,11 @@ sds sdsnewlen(const void *init, size_t initlen) {
         usable = sdsTypeMaxSize(type);
     switch(type) {
         case SDS_TYPE_5: {
-            *fp = type | (initlen << SDS_TYPE_BITS);
+            *fp = type | (initlen << SDS_TYPE_BITS); // 通过这一句，用 1 byte 的: 高5位保存 initlen（即字符长度）, 低3位保存类型（此处永远是 000）
             break;
         }
         case SDS_TYPE_8: {
-            SDS_HDR_VAR(8,s);
+            SDS_HDR_VAR(8,s); // 宏：sds header指针变量
             sh->len = initlen;
             sh->alloc = usable;
             *fp = type;
@@ -156,7 +157,7 @@ sds sdsnewlen(const void *init, size_t initlen) {
             break;
         }
     }
-    if (initlen && init)
+    if (initlen && init) //sdsnew(NULL)不成立   sdsnew(SDS_NOINIT) 不成立   //sdsempty() 不成立  
         memcpy(s, init, initlen);
     s[initlen] = '\0';
     return s;
