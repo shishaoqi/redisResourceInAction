@@ -38,20 +38,22 @@ int main() {
 
     sds s = sdsnew("aaaaa");
     sds e = sdsnew("zzzzz");
-    zlexrangespec firstRange = { .min = s, .max = e, .minex = 0, .maxex = 1000 };
-    zlexrangespec lastRange = { .min = s, .max = e, .minex = 0, .maxex = 1000 };
+    zlexrangespec firstRange = { .min = s, .max = e, .minex = 0, .maxex = 0 };
+    zlexrangespec lastRange = { .min = s, .max = e, .minex = 0, .maxex = 0 };
     node = zslFirstInLexRange(sl, &firstRange);
     printf("first element: %s, score: %f\n", node->ele, node->score);
     node = zslLastInLexRange(sl, &lastRange);
     printf("last node -- element: %s, score: %.2f\n", node->ele, node->score);
 
-    zlexrangespec range  = { .min = s, .max = e, .minex = 0, .maxex = 1000 };
+    zlexrangespec range  = { .min = s, .max = e, .minex = 0, .maxex = 0 };
     while(node != NULL) {
         printf("element: %s, score: %f\n", node->ele, node->score);
 
         zslDelete(sl, node->score, node->ele, NULL);
         node = zslFirstInLexRange(sl, &range);
     }
+
+    zslFree(sl);
 
     return 0;
 }

@@ -24,10 +24,10 @@ typedef struct zskiplist {
     int level;
 } zskiplist;
 
-typedef struct zset {
-    dict *dict;
-    zskiplist *zsl;
-} zset;
+// typedef struct zset {
+//     dict *dict;
+//     zskiplist *zsl;
+// } zset;
 
 /* Struct to hold an inclusive/exclusive range spec by score comparison. */
 typedef struct {
